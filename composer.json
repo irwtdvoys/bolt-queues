@@ -14,7 +14,7 @@
     ],
     "require": {
         "php": ">=5.6",
-        "cruxoft/bolt-core": "^0.5"
+        "cruxoft/bolt-core": "^0.6"
     },
     "autoload": {
         "psr-4": {
