@@ -2,15 +2,23 @@
 	namespace Bolt\Queue;
 
 	use Bolt\Interfaces\Connection;
+	use Bolt\Job;
 
 	/**
 	 * Class QueueWorker
 	 * This class has been designed to run standalone jobs issued from any chosen queueing implementation.
 	 *
-	 * @package Cube
+	 * @package Bolt
 	 */
 	class Worker
 	{
+		/**
+		 * Adapter for handling queue
+		 *
+		 * @var
+		 */
+		public $adapter;
+
 		/**
 		 * Current amount of work iterations a worker has carried out.
 		 *
@@ -47,6 +55,11 @@
 			declare(ticks = 1);
 
 			$this->connection = $connection;
+
+			// set adapter
+			$className = "App\\Adapters\\Queue\\" . $connection->className(false);
+			$this->adapter = new $className($connection);
+
 			$this->pcntl = extension_loaded('pcntl');
 
 			if ($this->pcntl)
@@ -69,7 +82,7 @@
 				case SIGTERM:
 				case SIGINT:
 				case SIGQUIT:
-					$this->printOutput("Exiting", "system");
+					$this->output("Exiting", "system");
 					$this->shouldRun = false;
 					break;
 			}
@@ -78,18 +91,29 @@
 		/**
 		 * Pops the next job out of the chosen queue platform
 		 *
-		 * @param string $queueName The nice name for the queue we are requesting the job from
-		 * @return AbstractJob
+		 * @return Job | false
 		 */
 		protected function getJob()
 		{
-			$job = new \App\Models\Job($this->connection);
-			$result = $job->fetch();
+			$data = $this->adapter->fetch();
 
-			if ($result === false)
+			if ($data === false)
 			{
 				return false;
 			}
+
+			$jobClass = "\\App\\Jobs\\" . str_replace(".", "\\", $data->type);
+
+			if (!class_exists($jobClass))
+			{
+				$this->output("'" . $data->type . "' job not found");
+				return false;
+			}
+
+			$job = new $jobClass($this->connection);
+			$job->type($data->type);
+			$job->data($data->data);
+			$job->receipt($data->receipt);
 
 			return $job;
 		}
@@ -100,7 +124,7 @@
 		 */
 		public function start()
 		{
-			$this->printOutput("Starting PHP queue worker", "system");
+			$this->output("Starting PHP queue worker", "system");
 
 			while ($this->shouldRun)
 			{
@@ -114,7 +138,8 @@
 
 				try
 				{
-					$this->printOutput("Job received (" . $job->type . ")", "job");
+					// Todo: alter location of job type - build from class name
+					$this->output("Job received (" . $job->type . ")", "job");
 
 					try
 					{
@@ -122,25 +147,25 @@
 					}
 					catch (\Exception $e)
 					{
-						$this->printOutput($e->getMessage(), "job");
+						$this->output($e->getMessage(), "job");
 						$result = false;
 					}
 
-					if ($result === true)
+					if ($result->success() === true)
 					{
-						$this->printOutput("Job deleted", "job");
-						$job->delete();
+						$this->output("Job deleted", "job");
+						$this->adapter->delete($job->receipt());
 					}
 					else
 					{
-						$this->printOutput("Job released", "job");
-						$job->release();
+						$this->output("Job released", "job");
+						$this->adapter->release($job->receipt());
 					}
 				}
 				catch (\Exception $e)
 				{
-					$this->printOutput("Job released", "job");
-					$job->release();
+					$this->output("Job released", "job");
+					$this->adapter->release($job->receipt());
 					error_log($e->getTraceAsString());
 				}
 
@@ -151,7 +176,7 @@
 			}
 		}
 
-		private function printOutput($message, $type = null)
+		private function output($message, $type = null)
 		{
 			switch ($type)
 			{
