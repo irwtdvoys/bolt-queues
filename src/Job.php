@@ -9,6 +9,7 @@
 
 		public $type = null;
 		public $data = array();
+		public $receipt = null;
 
 		public function __construct(Connection $connection = null)
 		{
