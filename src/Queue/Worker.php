@@ -1,6 +1,7 @@
 <?php
 	namespace Bolt\Queue;
 
+	use App\Jobs\Metrics;
 	use Bolt\Interfaces\Connection;
 	use Bolt\Job;
 
@@ -106,7 +107,7 @@
 
 			if (!class_exists($jobClass))
 			{
-				$this->output("'" . $data->type . "' job not found");
+				$this->output("'" . $data->type . "' job not found", "error");
 				return false;
 			}
 
@@ -147,8 +148,8 @@
 					}
 					catch (\Exception $e)
 					{
-						$this->output($e->getMessage(), "job");
-						$result = false;
+						$this->output($e->getMessage(), "error");
+						$result = new Metrics();
 					}
 
 					if ($result->success() === true)
