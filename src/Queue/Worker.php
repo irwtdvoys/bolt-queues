@@ -1,6 +1,7 @@
 <?php
 	namespace Bolt\Queue;
 
+	use App\Jobs\Metrics;
 	use Bolt\Interfaces\Connection;
 	use Bolt\Job;
 
@@ -147,8 +148,8 @@
 					}
 					catch (\Exception $e)
 					{
-						$result = false;
 						$this->output($e->getMessage(), "error");
+						$result = new Metrics();
 					}
 
 					if ($result->success() === true)
