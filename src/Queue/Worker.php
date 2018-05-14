@@ -1,9 +1,9 @@
 <?php
 	namespace Bolt\Queue;
 
-	use App\Jobs\Metrics;
 	use Bolt\Interfaces\Connection;
 	use Bolt\Job;
+	use Bolt\Metrics;
 
 	/**
 	 * Class QueueWorker
