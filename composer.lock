@@ -4,21 +4,24 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "b8b347628fed9319d320a627ad5a5133",
+    "content-hash": "77c5ed854a3a02f7084f76403d2043a2",
     "packages": [
         {
             "name": "cruxoft/bolt-core",
-            "version": "0.7.0",
+            "version": "0.9.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/irwtdvoys/bolt-core.git",
-                "reference": "3d909285cf63728d1a43a3c66dad5edabc4b7381"
+                "reference": "e49baa3a8ab8616e80d14316b843296d9ebb2c14"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/irwtdvoys/bolt-core/zipball/3d909285cf63728d1a43a3c66dad5edabc4b7381",
-                "reference": "3d909285cf63728d1a43a3c66dad5edabc4b7381",
+                "url": "https://api.github.com/repos/irwtdvoys/bolt-core/zipball/e49baa3a8ab8616e80d14316b843296d9ebb2c14",
+                "reference": "e49baa3a8ab8616e80d14316b843296d9ebb2c14",
                 "shasum": ""
+            },
+            "require": {
+                "php": "^7"
             },
             "require-dev": {
                 "cruxoft/dump": "^0.2.2"
@@ -44,7 +47,7 @@
                 "bolt",
                 "framework"
             ],
-            "time": "2019-09-01T11:07:21+00:00"
+            "time": "2020-01-23T11:35:48+00:00"
         }
     ],
     "packages-dev": [],
