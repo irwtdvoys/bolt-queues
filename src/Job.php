@@ -23,16 +23,16 @@
 			switch ($type)
 			{
 				case "system":
-					$colour = "\e[33m";
+					$colour = Job\Output::SYSTEM;
 					break;
 				case "job":
-					$colour = "\e[34m";
+					$colour = Job\Output::JOB;
 					break;
 				case "error":
-					$colour = "\e[31m";
+					$colour = Job\Output::ERROR;
 					break;
 				default:
-					$colour = "\033[0m";
+					$colour = Job\Output::DEFAULT;
 					break;
 			}
 
