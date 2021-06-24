@@ -3,6 +3,7 @@
 
 	use Bolt\Interfaces\Connection;
 	use Bolt\Job\Colours;
+	use Bolt\Job\Output;
 
 	abstract class Job extends Base
 	{
@@ -38,13 +39,13 @@
 		{
 			switch ($type)
 			{
-				case "system":
+				case Output::SYSTEM:
 					$colour = Colours::SYSTEM;
 					break;
-				case "job":
+				case Output::JOB:
 					$colour = Colours::JOB;
 					break;
-				case "error":
+				case Output::ERROR:
 					$colour = Colours::ERROR;
 					break;
 				default:

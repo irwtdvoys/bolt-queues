@@ -22,31 +22,23 @@
 
 		/**
 		 * Current amount of work iterations a worker has carried out.
-		 *
-		 * @var int
 		 */
-		private $loopNumber = 0;
+		private int $loopNumber = 0;
 
 		/**
 		 * Should the worker continue running after finishing it's current job
-		 *
-		 * @var bool
 		 */
-		private $shouldRun = true;
+		private bool $shouldRun = true;
 
 		/**
 		 * The chosen queueing implementation to get tasks from
-		 *
-		 * @var Connection
 		 */
-		private $connection;
+		private Connection $connection;
 
 		/**
 		 * If the current platform has support for the pcntl extension
-		 *
-		 * @var bool
 		 */
-		private $pcntl;
+		private bool $pcntl;
 
 		/**
 		 * @param Connection $connection
