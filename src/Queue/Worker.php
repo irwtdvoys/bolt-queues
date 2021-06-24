@@ -68,7 +68,7 @@
 		 *
 		 * @param int $signal The signal number received
 		 */
-		public function signalHandler($signal)
+		public function signalHandler(int $signal): void
 		{
 			switch ($signal)
 			{
@@ -83,10 +83,8 @@
 
 		/**
 		 * Pops the next job out of the chosen queue platform
-		 *
-		 * @return Job | false
 		 */
-		protected function getJob()
+		protected function getJob(): Job|false
 		{
 			$data = $this->adapter->fetch();
 
@@ -114,7 +112,7 @@
 		 * Begins working on jobs in the chosen queue platform
 		 *
 		 */
-		public function start()
+		public function start(): void
 		{
 			$this->output("Starting PHP queue worker", "system");
 
@@ -168,7 +166,7 @@
 			}
 		}
 
-		private function output($message, $type = null)
+		private function output(string $message, string $type = null): void
 		{
 			switch ($type)
 			{

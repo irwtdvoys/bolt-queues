@@ -35,7 +35,7 @@
 			return $this->metrics();
 		}
 
-		public function output($message, $type = null)
+		public function output($message, $type = null): void
 		{
 			switch ($type)
 			{

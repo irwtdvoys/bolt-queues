@@ -7,7 +7,7 @@
 		public string $message;
 		public array $data;
 
-		public function __toString()
+		public function __toString(): string
 		{
 			return (string)$this->message();
 		}
