@@ -1,1 +1,1 @@
-#bolt-queues (0.3.2)
+#bolt-queues (0.4.0)

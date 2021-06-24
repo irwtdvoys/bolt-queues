@@ -3,11 +3,11 @@
 
 	class Metrics extends Base
 	{
-		public $success = false;
-		public $message;
-		public $data;
+		public bool $success = false;
+		public string $message;
+		public array $data;
 
-		public function __toString()
+		public function __toString(): string
 		{
 			return (string)$this->message();
 		}

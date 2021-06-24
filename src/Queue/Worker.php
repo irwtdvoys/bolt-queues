@@ -22,31 +22,23 @@
 
 		/**
 		 * Current amount of work iterations a worker has carried out.
-		 *
-		 * @var int
 		 */
-		private $loopNumber = 0;
+		private int $loopNumber = 0;
 
 		/**
 		 * Should the worker continue running after finishing it's current job
-		 *
-		 * @var bool
 		 */
-		private $shouldRun = true;
+		private bool $shouldRun = true;
 
 		/**
 		 * The chosen queueing implementation to get tasks from
-		 *
-		 * @var Connection
 		 */
-		private $connection;
+		private Connection $connection;
 
 		/**
 		 * If the current platform has support for the pcntl extension
-		 *
-		 * @var bool
 		 */
-		private $pcntl;
+		private bool $pcntl;
 
 		/**
 		 * @param Connection $connection
@@ -76,7 +68,7 @@
 		 *
 		 * @param int $signal The signal number received
 		 */
-		public function signalHandler($signal)
+		public function signalHandler(int $signal): void
 		{
 			switch ($signal)
 			{
@@ -91,10 +83,8 @@
 
 		/**
 		 * Pops the next job out of the chosen queue platform
-		 *
-		 * @return Job | false
 		 */
-		protected function getJob()
+		protected function getJob(): Job|false
 		{
 			$data = $this->adapter->fetch();
 
@@ -112,7 +102,6 @@
 			}
 
 			$job = new $jobClass($this->connection);
-			$job->type($data->type);
 			$job->data($data->data);
 			$job->receipt($data->receipt);
 
@@ -123,7 +112,7 @@
 		 * Begins working on jobs in the chosen queue platform
 		 *
 		 */
-		public function start()
+		public function start(): void
 		{
 			$this->output("Starting PHP queue worker", "system");
 
@@ -144,7 +133,7 @@
 
 					try
 					{
-						$result = $job->execute();
+						$result = $job->run();
 					}
 					catch (\Exception $e)
 					{
@@ -177,7 +166,7 @@
 			}
 		}
 
-		private function output($message, $type = null)
+		private function output(string $message, string $type = null): void
 		{
 			switch ($type)
 			{

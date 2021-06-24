@@ -13,9 +13,10 @@
         }
     ],
     "require": {
-        "php": ">=5.6",
-        "cruxoft/bolt-core": "^0.9.0"
-    },
+        "php": ">=8.0",
+        "cruxoft/bolt-core": "^0.10.0",
+		"ext-pcntl": "*"
+	},
     "autoload": {
         "psr-4": {
             "Bolt\\": "src/"

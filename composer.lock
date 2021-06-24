@@ -4,23 +4,24 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "77c5ed854a3a02f7084f76403d2043a2",
+    "content-hash": "9ae168f6b60548bae99a0f7f04996508",
     "packages": [
         {
             "name": "cruxoft/bolt-core",
-            "version": "0.9.1",
+            "version": "0.10.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/irwtdvoys/bolt-core.git",
-                "reference": "e49baa3a8ab8616e80d14316b843296d9ebb2c14"
+                "reference": "810d7a3979554fb5da39b6b99aa91c09280d0ebd"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/irwtdvoys/bolt-core/zipball/e49baa3a8ab8616e80d14316b843296d9ebb2c14",
-                "reference": "e49baa3a8ab8616e80d14316b843296d9ebb2c14",
+                "url": "https://api.github.com/repos/irwtdvoys/bolt-core/zipball/810d7a3979554fb5da39b6b99aa91c09280d0ebd",
+                "reference": "810d7a3979554fb5da39b6b99aa91c09280d0ebd",
                 "shasum": ""
             },
             "require": {
+                "cruxoft/bolt-support": "^0.4.0",
                 "php": "^7"
             },
             "require-dev": {
@@ -47,7 +48,59 @@
                 "bolt",
                 "framework"
             ],
-            "time": "2020-01-23T11:35:48+00:00"
+            "support": {
+                "issues": "https://github.com/irwtdvoys/bolt-core/issues",
+                "source": "https://github.com/irwtdvoys/bolt-core/tree/0.10.4"
+            },
+            "time": "2020-12-13T20:09:58+00:00"
+        },
+        {
+            "name": "cruxoft/bolt-support",
+            "version": "0.4.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/irwtdvoys/bolt-support.git",
+                "reference": "98d2eee0d68795799572850e532f49d6cfbfd4d6"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/irwtdvoys/bolt-support/zipball/98d2eee0d68795799572850e532f49d6cfbfd4d6",
+                "reference": "98d2eee0d68795799572850e532f49d6cfbfd4d6",
+                "shasum": ""
+            },
+            "require": {
+                "ext-json": "*",
+                "php": "^7.4"
+            },
+            "require-dev": {
+                "cruxoft/dump": "^0.2",
+                "phpunit/phpunit": "^9.4"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Bolt\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "Apache-2.0"
+            ],
+            "authors": [
+                {
+                    "name": "Steve Adams",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Standalone support library for the Bolt Framework",
+            "keywords": [
+                "bolt"
+            ],
+            "support": {
+                "issues": "https://github.com/irwtdvoys/bolt-support/issues",
+                "source": "https://github.com/irwtdvoys/bolt-support/tree/0.4.0"
+            },
+            "time": "2020-12-13T20:06:55+00:00"
         }
     ],
     "packages-dev": [],
@@ -57,7 +110,9 @@
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
-        "php": ">=5.6"
+        "php": ">=7.0",
+        "ext-pcntl": "*"
     },
-    "platform-dev": []
+    "platform-dev": [],
+    "plugin-api-version": "2.1.0"
 }
