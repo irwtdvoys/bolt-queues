@@ -6,20 +6,35 @@
 
 	abstract class Job extends Base
 	{
-		protected $connection;
+		protected ?Connection $connection;
+		protected Metrics $metrics;
 
-		public $type = null;
-		public $data = array();
-		public $receipt = null;
+		public array $data = array();
+		public ?string $receipt = null;
 
 		public function __construct(Connection $connection = null)
 		{
 			$this->connection = $connection;
 		}
 
-		abstract public function execute($data = null);
+		abstract public function execute(): void;
 
-		protected function output($message, $type = null)
+		public function run($data = null): Metrics
+		{
+			$this->metrics(new Metrics());
+			$this->output("Started `" . $this->className(false) . "` job", Output::JOB);
+
+			if (isset($data))
+			{
+				$this->data($data);
+			}
+
+			$this->execute();
+
+			return $this->metrics();
+		}
+
+		public function output($message, $type = null)
 		{
 			switch ($type)
 			{

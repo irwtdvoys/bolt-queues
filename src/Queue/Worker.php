@@ -112,7 +112,6 @@
 			}
 
 			$job = new $jobClass($this->connection);
-			$job->type($data->type);
 			$job->data($data->data);
 			$job->receipt($data->receipt);
 
@@ -144,7 +143,7 @@
 
 					try
 					{
-						$result = $job->execute();
+						$result = $job->run();
 					}
 					catch (\Exception $e)
 					{
